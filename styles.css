@@ -1,11 +1,13 @@
 #main {
     background-color: brown;
+    margin: 0;
+    padding: 0;
 }
 
 #main-table {
     margin: auto;
     margin-top: 0%;
-    width: 90%;
+    width: 100%;
 }
 
 #legend-table {
@@ -13,7 +15,16 @@
     width: 50%;
 }
 
-table, tr, td, th {
+th {
+    padding: 10px;
+    color: white;
+    border: 1px solid #080808;
+    border-collapse: collapse;
+    background: linear-gradient(top, #222222 0%, #000000 100%);
+    background:-webkit-linear-gradient(top, #222222 0%, #000000 100%);
+}
+
+table, tr, td {
     padding: 10px;
     color: white;
     border: 1px solid #080808;
@@ -31,26 +42,6 @@ td:hover {
     background: navy;
 }
 
-#important {
+a {
     color: yellow;
-}
-
-#not-important {
-    color: red;
-}
-
-#very-important {
-    color: #37dd48;
-}
-
-#test {
-    color: orange;
-}
-
-#image {
-    width: 90%;
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
 }
