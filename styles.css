@@ -1,0 +1,56 @@
+#main {
+    background-color: brown;
+}
+
+#main-table {
+    margin: auto;
+    margin-top: 0%;
+    width: 90%;
+}
+
+#legend-table {
+    margin: auto;
+    width: 50%;
+}
+
+table, tr, td, th {
+    padding: 10px;
+    color: white;
+    border: 1px solid #080808;
+    border-collapse: collapse;
+    background: linear-gradient(top, #3c3c3c 0%, #222222 100%);
+    background:-webkit-linear-gradient(top, #3c3c3c 0%, #222222 100%);
+}
+
+th {
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+td:hover {
+    background: navy;
+}
+
+#important {
+    color: yellow;
+}
+
+#not-important {
+    color: red;
+}
+
+#very-important {
+    color: #37dd48;
+}
+
+#test {
+    color: orange;
+}
+
+#image {
+    width: 90%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
