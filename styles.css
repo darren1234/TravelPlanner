@@ -20,8 +20,8 @@ th {
     color: white;
     border: 1px solid #080808;
     border-collapse: collapse;
-    background: linear-gradient(top, #222222 0%, #000000 100%);
-    background:-webkit-linear-gradient(top, #222222 0%, #000000 100%);
+    background: linear-gradient(top, #460670 0%, #000000 100%);
+    background:-webkit-linear-gradient(top, #460670 0%, #000000 100%);
 }
 
 table, tr, td {
