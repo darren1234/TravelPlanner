@@ -9,20 +9,113 @@
     <title>Travel Research</title>
 </head>
 
+<script>
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("main-table");
+  switching = true;
+  //Set the sorting direction to ascending:
+  dir = "asc"; 
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /*check if the two rows should switch place,
+      based on the direction, asc or desc:*/
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      //Each time a switch is done, increase this count by 1:
+      switchcount ++;      
+    } else {
+      /*If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again.*/
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+
+function sortNumTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("main-table");
+  switching = true;
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      //check if the two rows should switch place:
+      if (Number(x.innerHTML) > Number(y.innerHTML)) {
+        //if so, mark as a switch and break the loop:
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+</script>
+
 <body id="main">
     <table id="main-table">
         <tr>
-            <th>City</th>
-            <th>Country</th>
+            <th onclick="sortNumTable(0)">Rank</th>
+            <th onclick="sortTable(1)">City</th>
+            <th onclick="sortTable(2)">Country</th>
             <th>Visa Free</th>
-            <th>Nomad Score</th>
-            <th>Safety</th>
-            <th>English Speaking</th>
-            <th>Population</th>
+            <th onclick="sortNumTable(4)">Nomad Score</th>
+            <th onclick="sortNumTable(5)">Safety</th>
+            <th onclick="sortNumTable(6)">English Speaking</th>
+            <th onclick="sortNumTable(7)">Population</th>
             <th>Weather</th>
-            <th>Internet</th>
-            <th>Nomad Cost</th>
-            <th>Numbeo Cost</th>
+            <th onclick="sortNumTable(9)">Internet Speed (mbps)</th>
+            <th onclick="sortNumTable(10)">Nomad Cost</th>
+            <th onclick="sortNumTable(11)">Numbeo Cost</th>
             <th>Cost To Get To</th>
             <th>Natural Beauty</th>
             <th>Closest Travel</th>
@@ -32,354 +125,402 @@
         </tr>
 
         <tr>
+            <td>1</td>
             <td>Belgrade</td>
             <td>Serbia</td>
             <td>90 days</td>
             <td>7.46</td>
             <td>8</td>
             <td>8</td>
-            <td>1,400,000</td>
+            <td>1400000</td>
             <td>SE Europe (Fairly Mild)</td>
-            <td>24 mbps</td>
-            <td>$1371</td>
-            <td>Rank: 313 | 686.26C$ + 311.72 C$ = $997.98</td>
+            <td>24</td>
+            <td>1371</td>
+            <td>997.98</td>
             <td>$600 - $1000</td>
             <td>Danube, Parks, Lots to see</td>
             <td>Budapest, Sofia, Rome, Venice</td>
             <td><a href="https://www.thecrazytourist.com/25-best-things-belgrade-serbia/" target="popup"
-                onclick="window.open('https://www.thecrazytourist.com/25-best-things-belgrade-serbia/','popup','width=1400,height=800, top=100, left=200'); return false;">Things To Do</a></td>
-            <td><a href="belgrade.png" target="popup" 
-                onclick="window.open('belgrade.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick Info</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/25-best-things-belgrade-serbia/','popup','width=1400,height=800, top=100, left=200'); return false;">Things
+                    To Do</a></td>
+            <td><a href="belgrade.png" target="popup"
+                    onclick="window.open('belgrade.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick
+                    Info</a></td>
             <td>More Info...</td>
         </tr>
 
         <tr>
+            <td>11</td>
             <td>Novi Sad</td>
             <td>Serbia</td>
             <td>90 days</td>
             <td>6</td>
             <td>8</td>
             <td>6</td>
-            <td>300,000</td>
+            <td>300000</td>
             <td>SE Europe (Fairly Mild)</td>
-            <td>15 mbps</td>
-            <td>$1376</td>
-            <td>Rank: 362 | 601.20C$ + 241.45 C$ = $842.65</td>
+            <td>15</td>
+            <td>1376</td>
+            <td>842.65</td>
             <td>$600 - $1000 to Belgrade then bus</td>
             <td>Danube, Parks, Beaches</td>
             <td>Belgrade</td>
             <td><a href="https://www.thecrazytourist.com/15-best-things-novi-sad-serbia/" target="popup"
-                onclick="window.open('https://www.thecrazytourist.com/15-best-things-novi-sad-serbia/','popup','width=1400,height=800, top=100, left=200'); return false;">Things To Do</a></td>
-            <td><a href="novisad.png" target="popup" 
-                onclick="window.open('novisad.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick Info</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/15-best-things-novi-sad-serbia/','popup','width=1400,height=800, top=100, left=200'); return false;">Things
+                    To Do</a></td>
+            <td><a href="novisad.png" target="popup"
+                    onclick="window.open('novisad.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick
+                    Info</a></td>
             <td>More Info...</td>
         </tr>
 
         <tr>
+            <td>2</td>
             <td>Sofia</td>
             <td>Bulgaria</td>
             <td>90 Days</td>
             <td>7.14</td>
             <td>8</td>
             <td>6</td>
-            <td>1,300,000</td>
+            <td>1300000</td>
             <td>SE Europe (Fairly Mild)</td>
-            <td>18 mbps</td>
-            <td>$1324</td>
-            <td>Rank: 306 | 679.24C$ + 411.98 C$ = $1091.22</td>
+            <td>18</td>
+            <td>1324</td>
+            <td>1091.22</td>
             <td>$800 - $1000</td>
             <td>Parks</td>
             <td>Varna, Istanbul, Athens, Rome, Naples</td>
             <td><a href="https://www.thecrazytourist.com/15-best-things-sofia-bulgaria/" target="popup"
-                onclick="window.open('https://www.thecrazytourist.com/15-best-things-sofia-bulgaria/','popup','width=1400,height=800, top=100, left=200'); return false;">Things To Do</a></td>
-            <td><a href="sofia.png" target="popup" 
-                onclick="window.open('sofia.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick Info</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/15-best-things-sofia-bulgaria/','popup','width=1400,height=800, top=100, left=200'); return false;">Things
+                    To Do</a></td>
+            <td><a href="sofia.png" target="popup"
+                    onclick="window.open('sofia.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick
+                    Info</a></td>
             <td>More Info...</td>
         </tr>
 
         <tr>
+            <td>10</td>
             <td>Plovdiv</td>
             <td>Bulgaria</td>
             <td>90 days</td>
             <td>6.38</td>
             <td>8</td>
             <td>6</td>
-            <td>350,000</td>
+            <td>350000</td>
             <td>SE Europe (Fairly Mild)</td>
-            <td>25 mbps</td>
-            <td>$1250</td>
-            <td>Rank: 342 | 614.08C$ + 271.01 C$ = $885.09</td>
+            <td>25</td>
+            <td>1250</td>
+            <td>885.09</td>
             <td>~800 May need to grab a train from Sofia</td>
             <td>Parks, Amphitheater</td>
             <td>Sofia, Varna, Less airport options</td>
             <td><a href="https://www.thecrazytourist.com/15-best-things-plovdiv-bulgaria/" target="popup"
-                onclick="window.open('https://www.thecrazytourist.com/15-best-things-plovdiv-bulgaria/','popup','width=1400,height=800, top=100, left=200'); return false;">Things To Do</a></td>
-            <td><a href="plovdiv.png" target="popup" 
-                onclick="window.open('plovdiv.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick Info</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/15-best-things-plovdiv-bulgaria/','popup','width=1400,height=800, top=100, left=200'); return false;">Things
+                    To Do</a></td>
+            <td><a href="plovdiv.png" target="popup"
+                    onclick="window.open('plovdiv.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick
+                    Info</a></td>
             <td>More Info...</td>
         </tr>
 
         <tr>
+            <td>3</td>
             <td>Gdansk</td>
             <td>Poland</td>
             <td>Schengen (90 days in 180 days)</td>
             <td>7.32</td>
             <td>10</td>
             <td>8</td>
-            <td>580,000</td>
+            <td>580000</td>
             <td>Baltics East Europe</td>
-            <td>23 mbps</td>
-            <td>$1446</td>
-            <td>Rank: 298 | 739.04C$ + 519.89 C$ = $1258.93</td>
+            <td>23</td>
+            <td>1446</td>
+            <td>1258.93</td>
             <td>$530 - $1000</td>
             <td>Old Town, Beaches, Parks</td>
             <td>Warsaw, Berlin, Prague, Copenhagen, Vilnius, Riga</td>
             <td><a href="https://www.thecrazytourist.com/15-best-things-to-do-in-gdansk-poland/" target="popup"
-                onclick="window.open('https://www.thecrazytourist.com/15-best-things-to-do-in-gdansk-poland/','popup','width=1400,height=800, top=100, left=200'); return false;">Things To Do</a></td>
-            <td><a href="gdansk.png" target="popup" 
-                onclick="window.open('gdansk.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick Info</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/15-best-things-to-do-in-gdansk-poland/','popup','width=1400,height=800, top=100, left=200'); return false;">Things
+                    To Do</a></td>
+            <td><a href="gdansk.png" target="popup"
+                    onclick="window.open('gdansk.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick
+                    Info</a></td>
             <td>More Info...</td>
         </tr>
 
         <tr>
+            <td>9</td>
             <td>Krakow</td>
             <td>Poland</td>
             <td>Schengen Zone</td>
             <td>7.02</td>
             <td>9</td>
             <td>7</td>
-            <td>770,000</td>
+            <td>770000</td>
             <td>North East Europe(cool)</td>
-            <td>19 mbps</td>
-            <td>$1489</td>
-            <td>Rank: 309 | 704.87C$ + 549.61 C$ = $1254.48</td>
+            <td>19</td>
+            <td>1489</td>
+            <td>1254.48</td>
             <td>$700 - $1000</td>
             <td>Parks, Gardens</td>
             <td>Warsaw, Prague, Berlin, Budapest, Vienna</td>
             <td><a href="https://www.thecrazytourist.com/25-best-things-to-do-in-krakow-poland/" target="popup"
-                onclick="window.open('https://www.thecrazytourist.com/25-best-things-to-do-in-krakow-poland/','popup','width=1400,height=800, top=100, left=200'); return false;">Things To Do</a></td>
-            <td><a href="krakow.png" target="popup" 
-                onclick="window.open('krakow.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick Info</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/25-best-things-to-do-in-krakow-poland/','popup','width=1400,height=800, top=100, left=200'); return false;">Things
+                    To Do</a></td>
+            <td><a href="krakow.png" target="popup"
+                    onclick="window.open('krakow.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick
+                    Info</a></td>
             <td>More Info...</td>
         </tr>
 
         <tr>
+            <td>4</td>
             <td>Bucharest</td>
             <td>Romania</td>
             <td>90 days</td>
             <td>6.76</td>
             <td>8</td>
             <td>6</td>
-            <td>1,900,000</td>
+            <td>1900000</td>
             <td>Seasonal</td>
-            <td>54 mbps</td>
-            <td>$1495</td>
-            <td>Rank: 323 | 657.47C$ + 407.46 C$ = $1064.93</td>
+            <td>54</td>
+            <td>1495</td>
+            <td>1064.93</td>
             <td>$700</td>
             <td>Lots of Parks</td>
             <td>Constanta, Sofia, Varna, Belgrade</td>
             <td><a href="https://www.thecrazytourist.com/25-best-things-to-do-in-bucharest-romania/" target="popup"
-                onclick="window.open('https://www.thecrazytourist.com/25-best-things-to-do-in-bucharest-romania/','popup','width=1400,height=800, top=100, left=200'); return false;">Things To Do</a></td>
-            <td><a href="bucharest.png" target="popup" 
-                onclick="window.open('bucharest.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick Info</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/25-best-things-to-do-in-bucharest-romania/','popup','width=1400,height=800, top=100, left=200'); return false;">Things
+                    To Do</a></td>
+            <td><a href="bucharest.png" target="popup"
+                    onclick="window.open('bucharest.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick
+                    Info</a></td>
             <td>More Info...</td>
         </tr>
 
         <tr>
+            <td>12</td>
             <td>Timisoara</td>
             <td>Romaina</td>
             <td>90 days</td>
             <td>6.72</td>
             <td>8</td>
             <td>10</td>
-            <td>300,000</td>
+            <td>300000</td>
             <td>Seasonal</td>
-            <td>37 mbps</td>
-            <td>$1384</td>
-            <td>Rank: 351 | 613.90C$ + 323.97 C$ = $937.87</td>
+            <td>37</td>
+            <td>1384</td>
+            <td>937.87</td>
             <td>$700</td>
             <td>Parks</td>
             <td>Belgrade, Bucharest, Budapest</td>
             <td><a href="https://www.thecrazytourist.com/15-best-things-to-do-in-timisoara-romania/" target="popup"
-                onclick="window.open('https://www.thecrazytourist.com/15-best-things-to-do-in-timisoara-romania/','popup','width=1400,height=800, top=100, left=200'); return false;">Things To Do</a></td>
-            <td><a href="timisoara.png" target="popup" 
-                onclick="window.open('timisoara.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick Info</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/15-best-things-to-do-in-timisoara-romania/','popup','width=1400,height=800, top=100, left=200'); return false;">Things
+                    To Do</a></td>
+            <td><a href="timisoara.png" target="popup"
+                    onclick="window.open('timisoara.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick
+                    Info</a></td>
             <td>More Info...</td>
         </tr>
 
         <tr>
+            <td>6</td>
             <td>Budapest</td>
             <td>Hungary</td>
             <td>Schengen</td>
             <td>8</td>
             <td>8</td>
             <td>6</td>
-            <td>1,800,000</td>
+            <td>1800000</td>
             <td>Seasonal</td>
-            <td>34 mbps</td>
-            <td>$1587</td>
-            <td>Rank: 266 | 788.76C$ + 533.87 C$ = $1322.63</td>
+            <td>34</td>
+            <td>1587</td>
+            <td>1322.63</td>
             <td>$600 - $800</td>
             <td>Danube, Lots of Parks, Lake and River Beaches</td>
             <td>Vienna, Bratislava, Krakow, Zagreb, Venice</td>
             <td><a href="https://www.thecrazytourist.com/25-best-things-budapest/" target="popup"
-                onclick="window.open('https://www.thecrazytourist.com/25-best-things-budapest/','popup','width=1400,height=800, top=100, left=200'); return false;">Things To Do</a></td>
-            <td><a href="budapest.png" target="popup" 
-                onclick="window.open('budapest.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick Info</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/25-best-things-budapest/','popup','width=1400,height=800, top=100, left=200'); return false;">Things
+                    To Do</a></td>
+            <td><a href="budapest.png" target="popup"
+                    onclick="window.open('budapest.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick
+                    Info</a></td>
             <td>More Info...</td>
         </tr>
 
         <tr>
-            <td>Kiev</td>   
+            <td>5</td>
+            <td>Kiev</td>
             <td>Ukraine</td>
             <td>90 days in 180 days</td>
             <td>6.6</td>
             <td>6</td>
             <td>6</td>
-            <td>2,900,000</td>
+            <td>2900000</td>
             <td>Seasonal (Cool)</td>
-            <td>26 mbps</td>
-            <td>$1293</td>
-            <td>Rank: 397 | 540.89C$ + 410.25 C$ = $951.14</td>
+            <td>26</td>
+            <td>1293</td>
+            <td>951.14</td>
             <td>$700</td>
             <td>Dnieper River, Lots of Parks, Beaches</td>
             <td>Minsk, Lviv</td>
             <td><a href="https://www.thecrazytourist.com/25-best-things-to-do-in-kiev-ukraine/" target="popup"
-                onclick="window.open('https://www.thecrazytourist.com/25-best-things-to-do-in-kiev-ukraine/','popup','width=1400,height=800, top=100, left=200'); return false;">Things To Do</a></td>
-            <td><a href="kiev.png" target="popup" 
-                onclick="window.open('kiev.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick Info</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/25-best-things-to-do-in-kiev-ukraine/','popup','width=1400,height=800, top=100, left=200'); return false;">Things
+                    To Do</a></td>
+            <td><a href="kiev.png" target="popup"
+                    onclick="window.open('kiev.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick
+                    Info</a></td>
             <td>More Info...</td>
         </tr>
 
         <tr>
+            <td>7</td>
             <td>Lviv</td>
             <td>Ukraine</td>
             <td>90 days in 180 days</td>
             <td>6.14</td>
             <td>6</td>
             <td>6</td>
-            <td>720,000</td>
+            <td>720000</td>
             <td>Seasonal (Cool)</td>
-            <td>17 mbps</td>
-            <td>$907</td>
-            <td>Rank: 413 | 477.39C$ + 301.71 C$ = $779.10</td>
+            <td>17</td>
+            <td>907</td>
+            <td>779.10</td>
             <td>$700</td>
             <td>Parks, Architecture</td>
             <td>Krakow, Kiev, Budapest, Warsaw, Minsk</td>
             <td><a href="https://www.thecrazytourist.com/15-best-things-to-do-in-lviv-ukraine/" target="popup"
-                onclick="window.open('https://www.thecrazytourist.com/15-best-things-to-do-in-lviv-ukraine/','popup','width=1400,height=800, top=100, left=200'); return false;">Things To Do</a></td>
-            <td><a href="lviv.png" target="popup" 
-                onclick="window.open('lviv.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick Info</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/15-best-things-to-do-in-lviv-ukraine/','popup','width=1400,height=800, top=100, left=200'); return false;">Things
+                    To Do</a></td>
+            <td><a href="lviv.png" target="popup"
+                    onclick="window.open('lviv.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick
+                    Info</a></td>
             <td>More Info...</td>
         </tr>
 
         <tr>
+            <td>13</td>
             <td>Kosice</td>
             <td>Slovakia</td>
             <td>Schengen</td>
             <td>6.38</td>
             <td>9</td>
             <td>6</td>
-            <td>240,000</td>
+            <td>240000</td>
             <td>Seasonal</td>
-            <td>25 mbps</td>
-            <td>$1337</td>
-            <td>Rank: 413 | 806.84C$ + 528.41 C$ = $1335.25</td>
+            <td>25</td>
+            <td>1337</td>
+            <td>1335.25</td>
             <td>$650</td>
             <td>Parks</td>
             <td>Krakow, Lviv, Budapest, Prague, Venice</td>
             <td><a href="https://www.thecrazytourist.com/15-best-things-kosice-slovakia/" target="popup"
-                onclick="window.open('https://www.thecrazytourist.com/15-best-things-kosice-slovakia/','popup','width=1400,height=800, top=100, left=200'); return false;">Things To Do</a></td>
-            <td><a href="kosice.png" target="popup" 
-                onclick="window.open('kosice.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick Info</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/15-best-things-kosice-slovakia/','popup','width=1400,height=800, top=100, left=200'); return false;">Things
+                    To Do</a></td>
+            <td><a href="kosice.png" target="popup"
+                    onclick="window.open('kosice.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick
+                    Info</a></td>
             <td>More Info...</td>
         </tr>
 
         <tr>
+            <td>8</td>
             <td>Kaohsiung</td>
             <td>Taiwan</td>
             <td>90 days</td>
             <td>7.3</td>
             <td>9.5</td>
             <td>6</td>
-            <td>2,700,000</td>
+            <td>2700000</td>
             <td>Subtropical</td>
-            <td>28 mbps</td>
-            <td>$971</td>
-            <td>$600 + 214.90 C$ = $814.90 estimate</td>
+            <td>28</td>
+            <td>971</td>
+            <td>814.90</td>
             <td>$1000 - $1300</td>
             <td>Parks, Beaches</td>
             <td>Taipei, Tokyo, Seoul, SE Asia</td>
             <td><a href="https://thesmartlocal.com/read/scoot-to-kaohsiung" target="popup"
-                onclick="window.open('https://thesmartlocal.com/read/scoot-to-kaohsiung','popup','width=1400,height=800, top=100, left=200'); return false;">Things To Do</a></td>
-            <td><a href="kaohsiung.png" target="popup" 
-                onclick="window.open('kaohsiung.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick Info</a></td>
+                    onclick="window.open('https://thesmartlocal.com/read/scoot-to-kaohsiung','popup','width=1400,height=800, top=100, left=200'); return false;">Things
+                    To Do</a></td>
+            <td><a href="kaohsiung.png" target="popup"
+                    onclick="window.open('kaohsiung.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick
+                    Info</a></td>
             <td>More Info...</td>
         </tr>
 
         <tr>
+            <td>15</td>
             <td>Chiang Mai</td>
             <td>Thailand</td>
             <td>30 days</td>
             <td>7.82</td>
             <td>8</td>
             <td>5</td>
-            <td>130,000</td>
+            <td>130000</td>
             <td>Tropical</td>
-            <td>20 mbps</td>
-            <td>$1070</td>
-            <td>Rank: 283 | 697.15C$ + 341.34 C$ = $1038.49</td>
+            <td>20</td>
+            <td>1070</td>
+            <td>1038.49</td>
             <td>$850 - $1000</td>
             <td>Parks, Shrines, Old City</td>
             <td>Bangkok, SE Asia</td>
             <td><a href="https://www.nomadasaurus.com/10-things-to-do-in-chiang-mai/" target="popup"
-                onclick="window.open('https://www.nomadasaurus.com/10-things-to-do-in-chiang-mai/','popup','width=1400,height=800, top=100, left=200'); return false;">Things To Do</a></td>
-            <td><a href="chiangmai.png" target="popup" 
-                onclick="window.open('chiangmai.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick Info</a></td>
+                    onclick="window.open('https://www.nomadasaurus.com/10-things-to-do-in-chiang-mai/','popup','width=1400,height=800, top=100, left=200'); return false;">Things
+                    To Do</a></td>
+            <td><a href="chiangmai.png" target="popup"
+                    onclick="window.open('chiangmai.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick
+                    Info</a></td>
             <td>More Info...</td>
         </tr>
 
         <tr>
+            <td>14</td>
             <td>Bangkok</td>
             <td>Thailand</td>
             <td>30 days</td>
             <td>9.16</td>
             <td>8</td>
             <td>6</td>
-            <td>8,300,000</td>
+            <td>8300000</td>
             <td>Tropical</td>
-            <td>24 mbps</td>
-            <td>$1439</td>
-            <td>Rank: 222 | 889.00C$ + 446.11 C$ = $1335.11</td>
+            <td>24</td>
+            <td>1439</td>
+            <td>1335.11</td>
             <td>$850 - $1000</td>
             <td>Parks, River, Coast</td>
             <td>SE Asia</td>
             <td><a href="https://www.thecrazytourist.com/top-25-things-to-do-in-bangkok/" target="popup"
-                onclick="window.open('https://www.thecrazytourist.com/top-25-things-to-do-in-bangkok/','popup','width=1400,height=800, top=100, left=200'); return false;">Things To Do</a></td>
-            <td><a href="bangkok.png" target="popup" 
-                onclick="window.open('bangkok.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick Info</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/top-25-things-to-do-in-bangkok/','popup','width=1400,height=800, top=100, left=200'); return false;">Things
+                    To Do</a></td>
+            <td><a href="bangkok.png" target="popup"
+                    onclick="window.open('bangkok.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick
+                    Info</a></td>
             <td>More Info...</td>
         </tr>
 
         <tr>
+            <td>16</td>
             <td>Canggu (Bali)</td>
             <td>Indonesia</td>
             <td>30 days</td>
             <td>10</td>
             <td>8</td>
             <td>6</td>
-            <td>620,000</td>
+            <td>620000</td>
             <td>Tropical</td>
-            <td>20 mbps</td>
-            <td>$1001</td>
-            <td>Rank: 305 | 651.38C$ + 246.26 C$ = $897.64</td>
+            <td>20</td>
+            <td>1001</td>
+            <td>897.64</td>
             <td>$850 - $1000</td>
             <td>Nature Reserves, Beach</td>
             <td>SE Asia, Islands</td>
             <td><a href="https://www.taylorstracks.com/things-to-do-in-canggu-bali/" target="popup"
-                onclick="window.open('https://www.taylorstracks.com/things-to-do-in-canggu-bali/','popup','width=1400,height=800, top=100, left=200'); return false;">Things To Do</a></td>
-            <td><a href="canggu.png" target="popup" 
-                onclick="window.open('canggu.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick Info</a></td>
+                    onclick="window.open('https://www.taylorstracks.com/things-to-do-in-canggu-bali/','popup','width=1400,height=800, top=100, left=200'); return false;">Things
+                    To Do</a></td>
+            <td><a href="canggu.png" target="popup"
+                    onclick="window.open('canggu.png','popup','width=1000,height=800, top=100, left=400'); return false;">Quick
+                    Info</a></td>
             <td>More Info...</td>
         </tr>
 
