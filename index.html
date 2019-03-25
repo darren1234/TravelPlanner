@@ -65,37 +65,73 @@
         }
     }
 
+    let sortDirection = true;
+
     function sortNumTable(n) {
         var table, rows, switching, i, x, y, shouldSwitch;
         table = document.getElementById("main-table");
         switching = true;
-        /*Make a loop that will continue until
-        no switching has been done:*/
-        while (switching) {
-            //start by saying: no switching is done:
-            switching = false;
-            rows = table.rows;
-            /*Loop through all table rows (except the
-            first, which contains table headers):*/
-            for (i = 1; i < (rows.length - 1); i++) {
-                //start by saying there should be no switching:
-                shouldSwitch = false;
-                /*Get the two elements you want to compare,
-                one from current row and one from the next:*/
-                x = rows[i].getElementsByTagName("TD")[n];
-                y = rows[i + 1].getElementsByTagName("TD")[n];
-                //check if the two rows should switch place:
-                if (Number(x.innerHTML) > Number(y.innerHTML)) {
-                    //if so, mark as a switch and break the loop:
-                    shouldSwitch = true;
-                    break;
+        
+        if (sortDirection) {
+            sortDirection = !sortDirection; //change the sort direction for the next sort
+            /*Make a loop that will continue until
+            no switching has been done:*/
+            while (switching) {
+                //start by saying: no switching is done:
+                switching = false;
+                rows = table.rows;
+                /*Loop through all table rows (except the
+                first, which contains table headers):*/
+                for (i = 1; i < (rows.length - 1); i++) {
+                    //start by saying there should be no switching:
+                    shouldSwitch = false;
+                    /*Get the two elements you want to compare,
+                    one from current row and one from the next:*/
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+                    //check if the two rows should switch place:
+                    if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+                if (shouldSwitch) {
+                    /*If a switch has been marked, make the switch
+                    and mark that a switch has been done:*/
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
                 }
             }
-            if (shouldSwitch) {
-                /*If a switch has been marked, make the switch
-                and mark that a switch has been done:*/
-                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                switching = true;
+        }
+        else { //sort in opposite direction
+            sortDirection = !sortDirection; //change the sort direction for the next sort
+            while (switching) {
+                //start by saying: no switching is done:
+                switching = false;
+                rows = table.rows;
+                /*Loop through all table rows (except the
+                first, which contains table headers):*/
+                for (i = 1; i < (rows.length - 1); i++) {
+                    //start by saying there should be no switching:
+                    shouldSwitch = false;
+                    /*Get the two elements you want to compare,
+                    one from current row and one from the next:*/
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+                    //check if the two rows should switch place:
+                    if (Number(x.innerHTML) < Number(y.innerHTML)) {
+                        //if so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+                if (shouldSwitch) {
+                    /*If a switch has been marked, make the switch
+                    and mark that a switch has been done:*/
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
             }
         }
     }
@@ -141,9 +177,11 @@
             <td>Danube, Parks, Lots to see</td>
             <td>Budapest, Sofia, Rome, Venice</td>
             <td><a href="https://www.thecrazytourist.com/25-best-things-belgrade-serbia/" target="popup"
-                    onclick="window.open('https://www.thecrazytourist.com/25-best-things-belgrade-serbia/','popup','width=1400,height=800, top=100, left=200'); return false;">Belgrade</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/25-best-things-belgrade-serbia/','popup','width=1400,height=800, top=100, left=200'); return false;">Belgrade</a>
+            </td>
             <td><a href="belgrade.png" target="popup"
-                    onclick="window.open('belgrade.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad List</a></td>
+                    onclick="window.open('belgrade.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad
+                    List</a></td>
             <td><a href="https://versus.com/en/belgrade" target="popup"
                     onclick="window.open('https://versus.com/en/belgrade','popup','width=1400,height=800, top=100, left=200'); return false;">73</a>
             </td>
@@ -166,9 +204,11 @@
             <td>Danube, Parks, Beaches</td>
             <td>Belgrade</td>
             <td><a href="https://www.thecrazytourist.com/15-best-things-novi-sad-serbia/" target="popup"
-                    onclick="window.open('https://www.thecrazytourist.com/15-best-things-novi-sad-serbia/','popup','width=1400,height=800, top=100, left=200'); return false;">Novi Sad</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/15-best-things-novi-sad-serbia/','popup','width=1400,height=800, top=100, left=200'); return false;">Novi
+                    Sad</a></td>
             <td><a href="novisad.png" target="popup"
-                    onclick="window.open('novisad.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad List</a></td>
+                    onclick="window.open('novisad.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad
+                    List</a></td>
             <td>N/A</td>
         </tr>
 
@@ -189,9 +229,11 @@
             <td>Parks</td>
             <td>Varna, Istanbul, Athens, Rome, Naples</td>
             <td><a href="https://www.thecrazytourist.com/15-best-things-sofia-bulgaria/" target="popup"
-                    onclick="window.open('https://www.thecrazytourist.com/15-best-things-sofia-bulgaria/','popup','width=1400,height=800, top=100, left=200'); return false;">Sofia</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/15-best-things-sofia-bulgaria/','popup','width=1400,height=800, top=100, left=200'); return false;">Sofia</a>
+            </td>
             <td><a href="sofia.png" target="popup"
-                    onclick="window.open('sofia.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad List</a></td>
+                    onclick="window.open('sofia.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad
+                    List</a></td>
             <td><a href="https://versus.com/en/sofia" target="popup"
                     onclick="window.open('https://versus.com/en/sofia','popup','width=1400,height=800, top=100, left=200'); return false;">80</a>
             </td>
@@ -214,9 +256,11 @@
             <td>Parks, Amphitheater</td>
             <td>Sofia, Varna, Less airport options</td>
             <td><a href="https://www.thecrazytourist.com/15-best-things-plovdiv-bulgaria/" target="popup"
-                    onclick="window.open('https://www.thecrazytourist.com/15-best-things-plovdiv-bulgaria/','popup','width=1400,height=800, top=100, left=200'); return false;">Plovdiv</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/15-best-things-plovdiv-bulgaria/','popup','width=1400,height=800, top=100, left=200'); return false;">Plovdiv</a>
+            </td>
             <td><a href="plovdiv.png" target="popup"
-                    onclick="window.open('plovdiv.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad List</a></td>
+                    onclick="window.open('plovdiv.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad
+                    List</a></td>
             <td>N/A</td>
         </tr>
 
@@ -237,9 +281,11 @@
             <td>Old Town, Beaches, Parks</td>
             <td>Warsaw, Berlin, Prague, Copenhagen, Vilnius, Riga</td>
             <td><a href="https://www.thecrazytourist.com/15-best-things-to-do-in-gdansk-poland/" target="popup"
-                    onclick="window.open('https://www.thecrazytourist.com/15-best-things-to-do-in-gdansk-poland/','popup','width=1400,height=800, top=100, left=200'); return false;">Gdansk</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/15-best-things-to-do-in-gdansk-poland/','popup','width=1400,height=800, top=100, left=200'); return false;">Gdansk</a>
+            </td>
             <td><a href="gdansk.png" target="popup"
-                    onclick="window.open('gdansk.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad List</a></td>
+                    onclick="window.open('gdansk.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad
+                    List</a></td>
             <td>N/A</td>
         </tr>
 
@@ -260,9 +306,11 @@
             <td>Parks, Gardens</td>
             <td>Warsaw, Prague, Berlin, Budapest, Vienna</td>
             <td><a href="https://www.thecrazytourist.com/25-best-things-to-do-in-krakow-poland/" target="popup"
-                    onclick="window.open('https://www.thecrazytourist.com/25-best-things-to-do-in-krakow-poland/','popup','width=1400,height=800, top=100, left=200'); return false;">Krakow</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/25-best-things-to-do-in-krakow-poland/','popup','width=1400,height=800, top=100, left=200'); return false;">Krakow</a>
+            </td>
             <td><a href="krakow.png" target="popup"
-                    onclick="window.open('krakow.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad List</a></td>
+                    onclick="window.open('krakow.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad
+                    List</a></td>
             <td><a href="https://versus.com/en/krakow" target="popup"
                     onclick="window.open('https://versus.com/en/krakow','popup','width=1400,height=800, top=100, left=200'); return false;">66</a>
         </tr>
@@ -284,9 +332,11 @@
             <td>Lots of Parks</td>
             <td>Constanta, Sofia, Varna, Belgrade</td>
             <td><a href="https://www.thecrazytourist.com/25-best-things-to-do-in-bucharest-romania/" target="popup"
-                    onclick="window.open('https://www.thecrazytourist.com/25-best-things-to-do-in-bucharest-romania/','popup','width=1400,height=800, top=100, left=200'); return false;">Bucharest</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/25-best-things-to-do-in-bucharest-romania/','popup','width=1400,height=800, top=100, left=200'); return false;">Bucharest</a>
+            </td>
             <td><a href="bucharest.png" target="popup"
-                    onclick="window.open('bucharest.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad List</a></td>
+                    onclick="window.open('bucharest.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad
+                    List</a></td>
             <td><a href="https://versus.com/en/bucharest" target="popup"
                     onclick="window.open('https://versus.com/en/bucharest','popup','width=1400,height=800, top=100, left=200'); return false;">68</a>
         </tr>
@@ -308,9 +358,11 @@
             <td>Parks</td>
             <td>Belgrade, Bucharest, Budapest</td>
             <td><a href="https://www.thecrazytourist.com/15-best-things-to-do-in-timisoara-romania/" target="popup"
-                    onclick="window.open('https://www.thecrazytourist.com/15-best-things-to-do-in-timisoara-romania/','popup','width=1400,height=800, top=100, left=200'); return false;">Timisoara</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/15-best-things-to-do-in-timisoara-romania/','popup','width=1400,height=800, top=100, left=200'); return false;">Timisoara</a>
+            </td>
             <td><a href="timisoara.png" target="popup"
-                    onclick="window.open('timisoara.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad List</a></td>
+                    onclick="window.open('timisoara.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad
+                    List</a></td>
             <td>N/A</td>
         </tr>
 
@@ -331,9 +383,11 @@
             <td>Danube, Lots of Parks, Lake and River Beaches</td>
             <td>Vienna, Bratislava, Krakow, Zagreb, Venice</td>
             <td><a href="https://www.thecrazytourist.com/25-best-things-budapest/" target="popup"
-                    onclick="window.open('https://www.thecrazytourist.com/25-best-things-budapest/','popup','width=1400,height=800, top=100, left=200'); return false;">Budapest</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/25-best-things-budapest/','popup','width=1400,height=800, top=100, left=200'); return false;">Budapest</a>
+            </td>
             <td><a href="budapest.png" target="popup"
-                    onclick="window.open('budapest.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad List</a></td>
+                    onclick="window.open('budapest.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad
+                    List</a></td>
             <td><a href="https://versus.com/en/budapest" target="popup"
                     onclick="window.open('https://versus.com/en/budapest','popup','width=1400,height=800, top=100, left=200'); return false;">80</a>
 
@@ -356,9 +410,11 @@
             <td>Dnieper River, Lots of Parks, Beaches</td>
             <td>Minsk, Lviv</td>
             <td><a href="https://www.thecrazytourist.com/25-best-things-to-do-in-kiev-ukraine/" target="popup"
-                    onclick="window.open('https://www.thecrazytourist.com/25-best-things-to-do-in-kiev-ukraine/','popup','width=1400,height=800, top=100, left=200'); return false;">Kiev</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/25-best-things-to-do-in-kiev-ukraine/','popup','width=1400,height=800, top=100, left=200'); return false;">Kiev</a>
+            </td>
             <td><a href="kiev.png" target="popup"
-                    onclick="window.open('kiev.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad List</a></td>
+                    onclick="window.open('kiev.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad
+                    List</a></td>
             <td><a href="https://versus.com/en/kiev" target="popup"
                     onclick="window.open('https://versus.com/en/kiev','popup','width=1400,height=800, top=100, left=200'); return false;">79</a>
         </tr>
@@ -380,9 +436,11 @@
             <td>Parks, Architecture</td>
             <td>Krakow, Kiev, Budapest, Warsaw, Minsk</td>
             <td><a href="https://www.thecrazytourist.com/15-best-things-to-do-in-lviv-ukraine/" target="popup"
-                    onclick="window.open('https://www.thecrazytourist.com/15-best-things-to-do-in-lviv-ukraine/','popup','width=1400,height=800, top=100, left=200'); return false;">Lviv</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/15-best-things-to-do-in-lviv-ukraine/','popup','width=1400,height=800, top=100, left=200'); return false;">Lviv</a>
+            </td>
             <td><a href="lviv.png" target="popup"
-                    onclick="window.open('lviv.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad List</a></td>
+                    onclick="window.open('lviv.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad
+                    List</a></td>
             <td>N/A</td>
         </tr>
 
@@ -403,9 +461,11 @@
             <td>Parks</td>
             <td>Krakow, Lviv, Budapest, Prague, Venice</td>
             <td><a href="https://www.thecrazytourist.com/15-best-things-kosice-slovakia/" target="popup"
-                    onclick="window.open('https://www.thecrazytourist.com/15-best-things-kosice-slovakia/','popup','width=1400,height=800, top=100, left=200'); return false;">Kosice</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/15-best-things-kosice-slovakia/','popup','width=1400,height=800, top=100, left=200'); return false;">Kosice</a>
+            </td>
             <td><a href="kosice.png" target="popup"
-                    onclick="window.open('kosice.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad List</a></td>
+                    onclick="window.open('kosice.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad
+                    List</a></td>
             <td>N/A</td>
         </tr>
 
@@ -426,9 +486,11 @@
             <td>Parks, Beaches</td>
             <td>Taipei, Tokyo, Seoul, SE Asia</td>
             <td><a href="https://thesmartlocal.com/read/scoot-to-kaohsiung" target="popup"
-                    onclick="window.open('https://thesmartlocal.com/read/scoot-to-kaohsiung','popup','width=1400,height=800, top=100, left=200'); return false;">Kaohsiung</a></td>
+                    onclick="window.open('https://thesmartlocal.com/read/scoot-to-kaohsiung','popup','width=1400,height=800, top=100, left=200'); return false;">Kaohsiung</a>
+            </td>
             <td><a href="kaohsiung.png" target="popup"
-                    onclick="window.open('kaohsiung.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad List</a></td>
+                    onclick="window.open('kaohsiung.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad
+                    List</a></td>
             <td>N/A</td>
         </tr>
 
@@ -449,9 +511,11 @@
             <td>Parks, Shrines, Old City</td>
             <td>Bangkok, SE Asia</td>
             <td><a href="https://www.nomadasaurus.com/10-things-to-do-in-chiang-mai/" target="popup"
-                    onclick="window.open('https://www.nomadasaurus.com/10-things-to-do-in-chiang-mai/','popup','width=1400,height=800, top=100, left=200'); return false;">Chiang Mai</a></td>
+                    onclick="window.open('https://www.nomadasaurus.com/10-things-to-do-in-chiang-mai/','popup','width=1400,height=800, top=100, left=200'); return false;">Chiang
+                    Mai</a></td>
             <td><a href="chiangmai.png" target="popup"
-                    onclick="window.open('chiangmai.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad List</a></td>
+                    onclick="window.open('chiangmai.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad
+                    List</a></td>
             <td><a href="https://versus.com/en/chiang-mai" target="popup"
                     onclick="window.open('https://versus.com/en/chiang-mai','popup','width=1400,height=800, top=100, left=200'); return false;">70</a>
         </tr>
@@ -473,9 +537,11 @@
             <td>Parks, River, Coast</td>
             <td>SE Asia</td>
             <td><a href="https://www.thecrazytourist.com/top-25-things-to-do-in-bangkok/" target="popup"
-                    onclick="window.open('https://www.thecrazytourist.com/top-25-things-to-do-in-bangkok/','popup','width=1400,height=800, top=100, left=200'); return false;">Bangkok</a></td>
+                    onclick="window.open('https://www.thecrazytourist.com/top-25-things-to-do-in-bangkok/','popup','width=1400,height=800, top=100, left=200'); return false;">Bangkok</a>
+            </td>
             <td><a href="bangkok.png" target="popup"
-                    onclick="window.open('bangkok.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad List</a></td>
+                    onclick="window.open('bangkok.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad
+                    List</a></td>
             <td><a href="https://versus.com/en/bangkok" target="popup"
                     onclick="window.open('https://versus.com/en/bangkok','popup','width=1400,height=800, top=100, left=200'); return false;">84</a>
         </tr>
@@ -497,9 +563,11 @@
             <td>Nature Reserves, Beach</td>
             <td>SE Asia, Islands</td>
             <td><a href="https://www.taylorstracks.com/things-to-do-in-canggu-bali/" target="popup"
-                    onclick="window.open('https://www.taylorstracks.com/things-to-do-in-canggu-bali/','popup','width=1400,height=800, top=100, left=200'); return false;">Canggu</a></td>
+                    onclick="window.open('https://www.taylorstracks.com/things-to-do-in-canggu-bali/','popup','width=1400,height=800, top=100, left=200'); return false;">Canggu</a>
+            </td>
             <td><a href="canggu.png" target="popup"
-                    onclick="window.open('canggu.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad List</a></td>
+                    onclick="window.open('canggu.png','popup','width=1000,height=800, top=100, left=400'); return false;">Nomad
+                    List</a></td>
             <td>N/A</td>
         </tr>
 
@@ -517,7 +585,8 @@
                     <li>Non-Schengen visas can be renewed fairly quickly usually, if you wish to extend your stay.</li>
                     <li>Internet connections need to be tested on a per case basis, but some countries have providers
                         with cheap data sims that can be used for a backup (or even primary.)</li>
-                    <li>The Numbeo Costs I used refer to cost of living with apartments outside city centers. Better apartment areas will typically run
+                    <li>The Numbeo Costs I used refer to cost of living with apartments outside city centers. Better
+                        apartment areas will typically run
                         an extra $100 - $200.</li>
                     <li>Travel Cost may be able to be minimized a little more with a bit of research.</li>
                     <li>Closest travel was typically set to major centers within a 300km - 400km radius. Honestly, most
@@ -525,10 +594,14 @@
                     <li>Only cities with a good stable connection was used.</li>
                     <li>Only cities with a lower cost of living was used.</li>
                     <li>The main resources use are:</li>
-                    <li style="list-style-type:none; padding-left: 470px;"><a href="https://nomadlist.com/" target="_blank">The Nomad List</a></li>
-                    <li style="list-style-type:none; padding-left: 470px;"><a href="https://www.numbeo.com/cost-of-living/" target="_blank">Numbeo</a></li>
-                    <li style="list-style-type:none; padding-left: 470px;"><a href="https://travel.gc.ca/" target="_blank">Canada Travel</a></li>
-                    <li style="list-style-type:none; padding-left: 470px;"><a href="https://www.skyscanner.ca/" target="_blank">Skyscanner</a></li>
+                    <li style="list-style-type:none; padding-left: 470px;"><a href="https://nomadlist.com/"
+                            target="_blank">The Nomad List</a></li>
+                    <li style="list-style-type:none; padding-left: 470px;"><a
+                            href="https://www.numbeo.com/cost-of-living/" target="_blank">Numbeo</a></li>
+                    <li style="list-style-type:none; padding-left: 470px;"><a href="https://travel.gc.ca/"
+                            target="_blank">Canada Travel</a></li>
+                    <li style="list-style-type:none; padding-left: 470px;"><a href="https://www.skyscanner.ca/"
+                            target="_blank">Skyscanner</a></li>
                 </ul>
             </td>
         </tr>
